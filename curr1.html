@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: 0 auto; padding: 20px; }
+        div { margin-bottom: 10px; }
+        input, select { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background: #4285f4; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; }
+        #result { margin-top: 15px; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>Currency Converter</h2>
+    <div>Amount: <input type="number" id="amount"></div>
+    <div>From: 
+        <select id="from">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="INR">INR</option>
+        </select>
+    </div>
+    <div>To: 
+        <select id="to">
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="INR">INR</option>
+        </select>
+    </div>
+    <button onclick="convert()">Convert</button>
+    <div id="result"></div>
+
+    <script>
+        const rates = { USD: 1.0, EUR: 0.93, GBP: 0.80, JPY: 151.50, INR: 83.50 };
+        function convert() {
+            const amount = parseFloat(document.getElementById("amount").value);
+            const from = document.getElementById("from").value;
+            const to = document.getElementById("to").value;
+            if (!amount || amount <= 0) {
+                document.getElementById("result").textContent = "Please enter valid amount";
+                return;
+            }
+            const result = (amount / rates[from]) * rates[to];
+            document.getElementById("result").textContent = 
+                `${amount.toFixed(2)} ${from} = ${result.toFixed(2)} ${to}`;
+        }
+    </script>
+</body>
+</html>
